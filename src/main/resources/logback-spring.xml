@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <!--控制台输出配置，class表示这个配置项需要用到这个类去处理-->
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <!--layout表示展示的配置-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                %d - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <!--配置文件输出，使其每天能产生一个INFO日志文件-->
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <!--过滤器，过滤出不需要输出的信息-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!--匹配信息为ERROR级别的信息-->
+            <level>ERROR</level>
+            <!--如果匹配，则执行该操作-->
+            <onMatch>DENY</onMatch>
+            <!--如果不匹配，则执行该操作-->
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+
+        <!--输出配置-->
+        <encoder>
+            <pattern>
+                %-5p %d - %msg%n
+            </pattern>
+        </encoder>
+
+        <!--滚动策略,使其每天产生一个日志文件-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>var/log/tomcat/sell/info.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!--配置文件输出，使其每天能产生一个ERROR日志文件-->
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <!--过滤器，过滤出需要输出的信息，默认Info级别-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!--表示只匹配输出ERROR级别以上的信息-->
+            <level>ERROR</level>
+        </filter>
+
+        <!--输出配置-->
+        <encoder>
+            <pattern>
+                %d - %msg%n
+            </pattern>
+        </encoder>
+
+        <!--滚动策略,使其每天产生一个日志文件-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>var/log/tomcat/sell/error.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!--配置文件输出，使其每天能产生一个WARN日志文件-->
+    <appender name="fileWarnLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--过滤器，过滤出需要输出的信息，默认Info级别-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!--表示只匹配输出WARN级别以上的信息-->
+            <level>WARN</level>
+        </filter>
+
+        <!--过滤器，过滤出不需要输出的信息-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!--表示只匹配WARN级别以上的信息-->
+            <level>ERROR</level>
+            <!--如果匹配，则执行该操作-->
+            <onMatch>DENY</onMatch>
+            <!--如果不匹配，则执行该操作-->
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+
+        <!--输出配置-->
+        <encoder>
+            <pattern>
+                %d - %msg%n
+            </pattern>
+        </encoder>
+
+        <!--滚动策略,使其每天产生一个日志文件-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>var/log/tomcat/sell/warn.%d.log</fileNamePattern>
+        </rollingPolicy>
+
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="consoleLog" />
+        <appender-ref ref="fileInfoLog" />
+        <appender-ref ref="fileErrorLog" />
+        <appender-ref ref="fileWarnLog" />
+    </root>
+
+    <!--输出指定类的日志-->
+    <!--<logger name="com.wxsell.LoggerTest" level="INFO">-->
+        <!--<appender-ref ref="consoleLog" />-->
+        <!--<appender-ref ref="fileInfoLog" />-->
+        <!--<appender-ref ref="fileErrorLog" />-->
+        <!--<appender-ref ref="fileWarnLog" />-->
+    <!--</logger>-->
+
+</configuration>

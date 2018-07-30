@@ -46,9 +46,9 @@
 
 
 ========================以下可观看视频5.4=============================<br/>
-访问服务器地址： 192.168.123.200（在服务器使用ifconfig查看服务器地址,教程中已经把该ip该为sell.com）访问首页，<br/>
+访问服务器地址： 如：192.168.123.200（在服务器使用ifconfig查看服务器地址,教程中已经把该ip在host文件中改为sell.com）访问首页，<br/>
 若要pc端正常访问可以设置一个openid的cookie，方法如下：<br/>
-&emsp;先访问http://192.168.123.200/#/order（因为这个页面不跳转），然后在cookie中添加openid，值任意<br/>
+&emsp;先访问http://192.168.123.200/#/order （因为这个页面不跳转），然后在cookie中添加openid，值任意<br/>
 &emsp;然后会发现，list接口请求失败，这是因为nginx代理配置未修改<br/>
 修改nginx配置：<br/>
 &emsp;vim /usr/local/nginx/conf/nginx.conf<br/>
@@ -63,7 +63,7 @@
 ========================以下可观看视频7.6========================<br/>
 服务器配置：<br/>
 &emsp;在/opt/code/sell_fe_buyer/config路径下修改index.js文件<br/>
-&emsp;将openidUrl改为http://cx.s1.natapp.cc（自己的内网映射隧道名）/sell/wechat/authorize<br/>
+&emsp;将openidUrl改为http://cx.s1.natapp.cc（自己的内网映射隧道名，我用的是natapp）/sell/wechat/authorize<br/>
 &emsp;重新构建：<br/>
 &emsp;&emsp;cd .. (回到/opt/code/sell_fe_buyer)<br/>
 &emsp;&emsp;npm run build(构建好的文件在dist目录下，将该目录的所有文件拷贝到网站的根目录下)<br/>

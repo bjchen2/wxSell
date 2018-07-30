@@ -94,3 +94,8 @@ ibootstrap引用链接，引用后缀为bootstrap.min.css即可<br/><br/>
 ========================以下可观看视频12.5========================<br/>
 PC端微信扫码登录功能不可用<br/>
 &emsp;因为微信开放平台需要提供公司认证，并花300元认证才能获取openAppId和openAppSecret，所以本项目扫码登录部分没有校验，无法保证正确性<br/>
+
+========================以下可观看视频12.7=============================<br/>
+登录网址为：http://cx.s1.natapp.cc/sell/wechat/qrAuthorize?returnUrl=http://cx.s1.natapp.cc/sell/seller/login<br/>
+登录成功后即跳转到http://cx.s1.natapp.cc/sell/seller/login?openid=xxx，成功获取openid<br/>
+**注意**：第一次登录会失败，因为数据库里没有该用户的openid，所以需要手动添加openid进数据库后才能登录成功<br/>

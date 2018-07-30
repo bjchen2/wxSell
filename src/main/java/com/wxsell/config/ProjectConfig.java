@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * Created By Cx On 2018/7/29 16:00
  */
 @Data
-@ConfigurationProperties(prefix = "projectUrl")
+@ConfigurationProperties(prefix = "project-url")
 @Component
 public class ProjectConfig {
 
@@ -22,4 +22,9 @@ public class ProjectConfig {
      * 微信开放平台授权url
      */
     private String wechatOpenAuthorize;
+
+    /**
+     * 项目地址
+     */
+    private String sell;
 }

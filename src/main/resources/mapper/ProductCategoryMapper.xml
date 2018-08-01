@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--现在官方更推荐使用注解的方法-->
+<mapper namespace="com.wxsell.domain.mapper.ProductCategoryMapper">
+    <resultMap id="ProductCategory" type="com.wxsell.domain.ProductCategory">
+        <id column="category_id" property="categoryId" jdbcType="INTEGER"/>
+        <id column="category_name" property="categoryName" jdbcType="VARCHAR"/>
+        <id column="category_type" property="categoryType" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="selectByCategoryType" resultMap="ProductCategory">
+        SELECT category_id,category_name,category_type
+        from product_category
+        where category_type = #{category_type}
+    </select>
+</mapper>

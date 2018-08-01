@@ -4,6 +4,7 @@ import com.wxsell.domain.OrderDetail;
 import com.wxsell.domain.ProductInfo;
 import com.wxsell.dto.OrderDto;
 import com.wxsell.service.OrderService;
+import com.wxsell.utils.JsonUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,9 @@ public class OrderServiceImplTest {
     @Test
     public void create() {
         OrderDto orderDto = new OrderDto();
-        orderDto.setUserName("小红");
-        orderDto.setUserPhone("1234567");
-        orderDto.setUserAddress("价位");
+        orderDto.setUserName("小红帽");
+        orderDto.setUserPhone("01234567");
+        orderDto.setUserAddress("我价的位");
         orderDto.setUserOpenid(OPENID);
         List<OrderDetail> details = new ArrayList<>();
         OrderDetail o1 = new OrderDetail();
@@ -45,8 +46,8 @@ public class OrderServiceImplTest {
         o2.setProductQuantity(2);
         details.add(o1); details.add(o2);
         orderDto.setOrderDetailList(details);
-
-        System.out.println(orderService.create(orderDto));
+        System.out.println(JsonUtil.toJson(orderDto));;
+        //System.out.println(orderService.create(orderDto));
     }
 
     @Test

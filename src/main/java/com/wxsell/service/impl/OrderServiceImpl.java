@@ -12,9 +12,7 @@ import com.wxsell.enums.ResultEnum;
 import com.wxsell.exception.SellException;
 import com.wxsell.repository.OrderDetailRepository;
 import com.wxsell.repository.OrderMasterRepository;
-import com.wxsell.service.OrderService;
-import com.wxsell.service.PayService;
-import com.wxsell.service.ProductInfoService;
+import com.wxsell.service.*;
 import com.wxsell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanMetadataAttribute;
@@ -48,6 +46,10 @@ public class OrderServiceImpl implements OrderService {
     OrderDetailRepository orderDetailRepository;
     @Autowired
     PayService payService;
+    @Autowired
+    PushMessageService pushMessageService;
+    @Autowired
+    WebSocket webSocket;
 
     @Override
     public OrderDto create(OrderDto orderDto) {
@@ -84,6 +86,8 @@ public class OrderServiceImpl implements OrderService {
         orderMasterRepository.save(orderMaster);
         //扣库存
         productInfoService.decreaseStock(cartDtos);
+        //webSocket发送消息，告知卖家有新订单
+        webSocket.sendMessage(orderId);
         return orderDto;
     }
 
@@ -151,7 +155,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderDto finish(OrderDto orderDto) {
         //判断订单状态
         if (!orderDto.getPayStatus().equals(OrderStatusEnum.NEW.getCode())){
-            log.error("[完结订单]订单状态不正确，orderId={},orderStatus={}",orderDto.getOrderId(),orderDto.getOrderStatus());
+            log.error("[接订单]订单状态不正确，orderId={},orderStatus={}",orderDto.getOrderId(),orderDto.getOrderStatus());
             throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
         }
         //修改订单状态并存储
@@ -159,6 +163,8 @@ public class OrderServiceImpl implements OrderService {
         OrderMaster orderMaster = new OrderMaster();
         BeanUtils.copyProperties(orderDto,orderMaster);
         orderMasterRepository.save(orderMaster);
+        //推送已接单消息
+        pushMessageService.orderFinish(orderDto);
         return orderDto;
     }
 

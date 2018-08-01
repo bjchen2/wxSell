@@ -95,7 +95,16 @@ ibootstrap引用链接，引用后缀为bootstrap.min.css即可<br/><br/>
 PC端微信扫码登录功能不可用<br/>
 &emsp;因为微信开放平台需要提供公司认证，并花300元认证才能获取openAppId和openAppSecret，所以本项目扫码登录部分没有校验，无法保证正确性<br/>
 
-========================以下可观看视频12.7=============================<br/>
+========================以下可观看视频12.7========================<br/>
 登录网址为：http://cx.s1.natapp.cc/sell/wechat/qrAuthorize?returnUrl=http://cx.s1.natapp.cc/sell/seller/login<br/>
 登录成功后即跳转到http://cx.s1.natapp.cc/sell/seller/login?openid=xxx，成功获取openid<br/>
-**注意**：第一次登录会失败，因为数据库里没有该用户的openid，所以需要手动添加openid进数据库后才能登录成功<br/>
+**注意**：第一次登录会失败，因为数据库里没有该用户的openid，所以需要手动添加openid进数据库后才能登录成功<br/><br/>
+
+========================以下可观看视频13.8========================<br/>
+个人感觉RedisLock类中的unlock方法写的有问题
+&emsp;在加锁时，假如有多个进程执行了getAndSet(key, value)方法，则key的value是最后一个进程的，但实际上真正获得锁的是第一个进程<br/>
+&emsp;所以在解锁时，可能redis的value和实际value不同，**个人认为**：解锁时不用验证value是否相当，直接解锁就行<br/>
+&emsp;因为只有获得锁才有资格继续往下执行，才有可能执行解锁操作，既然获得了锁，那么自然也有资格解锁了。<br/><br/>
+
+========================以下可观看视频13.9========================<br/>
+引用插件GenerateSerialVersionUID，可以去File->setting->Plugins中下载，可以通过快捷键自动生成唯一序列化ID，也可自己写，但较麻烦<br/>

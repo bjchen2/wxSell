@@ -21,6 +21,9 @@ public class BuyerServiceImpl implements BuyerService {
     @Autowired
     OrderService orderService;
 
+    /**
+     * 判断订单是否属于该用户，若订单号不存在，则返回null，若不属于该用户，则抛异常
+     */
     public OrderDto checkOrderOwner(String openid, String orderId){
         OrderDto orderDto = orderService.findOne(orderId);
         if (orderDto == null){

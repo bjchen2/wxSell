@@ -7,13 +7,13 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 /**
+ * 订单有关Service
  * Created By Cx On 2018/6/11 10:58
  */
 public interface OrderService {
 
     /**
-     * 创建订单概要
-     *
+     * 创建订单概要(下单)
      * @return
      */
     OrderDto create(OrderDto orderDto);
@@ -45,7 +45,7 @@ public interface OrderService {
     OrderDto cancel(OrderDto orderDto);
 
     /**
-     * 完成订单（即已接单）
+     * 接订单（即已接单）
      *
      * @return
      */

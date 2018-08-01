@@ -9,6 +9,9 @@ import com.wxsell.repository.ProductInfoRepository;
 import com.wxsell.service.ProductInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -24,12 +27,14 @@ import java.util.Optional;
 @Service
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
+@CacheConfig(cacheNames = "product")
 public class ProductInfoServiceImpl implements ProductInfoService {
 
     @Autowired
     ProductInfoRepository productInfoRepository;
 
     @Override
+    @Cacheable(key = "#id",unless = "#result == null ")
     public ProductInfo findOne(String id) {
         Optional<ProductInfo> productInfo = productInfoRepository.findById(id);
         //isPresent方法,判断返回的Optional是否为有价值的值（即是否不为空），若不为空则为true，否则false
@@ -50,6 +55,7 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     }
 
     @Override
+    @CachePut(key = "#product.productId")
     public ProductInfo save(ProductInfo product) {
         return productInfoRepository.save(product);
     }

@@ -11,6 +11,10 @@ import com.wxsell.utils.ResultUtil;
 import lombok.Getter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +37,7 @@ public class BuyerProductController {
     ProductInfoService productInfoService;
 
     @GetMapping("/list")
-    public ResultVO list() {
+    public ResultVO list(String orderId) {
         //获取所有上架商品
         List<ProductInfo> products = productInfoService.findUpAll();
 //        List<Integer> productTypes = new ArrayList<>();

@@ -9,7 +9,7 @@
 &emsp;github轮子，用于调用微信公众号接口 https://github.com/Wechat-Group/weixin-java-tools<br/>
 &emsp;github轮子，用于调用微信支付接口 https://github.com/Pay-Group/best-pay-sdk<br/>
  
-- **代码写于：2018-07-28**<br/>
+- **代码写于：2018-08-01**<br/>
    &emsp;JDK：JDK1.8版本，<br/>
    &emsp;IDE：IDEA 2017.3.3，<br/>
    &emsp;操作系统为：Windows10<br/>

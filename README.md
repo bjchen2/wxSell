@@ -43,8 +43,6 @@
 &emsp;如： BeanUtils.copyProperties(pi,productInfoVO);<br/>
 &emsp;注意：属性拷贝会覆盖所有公有属性值，所以谨慎使用<br/><br/>
 
-
-
 ========================以下可观看视频5.4=============================<br/>
 访问服务器地址： 如：192.168.123.200（在服务器使用ifconfig查看服务器地址,教程中已经把该ip在host文件中改为sell.com）访问首页，<br/>
 若要pc端正常访问可以设置一个openid的cookie，方法如下：<br/>
